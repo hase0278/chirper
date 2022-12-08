@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chirp;
+use App\Events\ChirpCreated;
 use Illuminate\Http\Request;
 
 class ChirpController extends Controller
@@ -43,7 +44,7 @@ class ChirpController extends Controller
         ]);
         $user = $request->user();
         $user->chirps()->create($validated);
- 
+        event(new ChirpCreated( $request->message ));
         return redirect(route('chirps.index'));
     }
 

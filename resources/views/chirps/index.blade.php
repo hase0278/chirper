@@ -57,3 +57,16 @@
         </div>
     </div>
 </x-app-layout>
+
+    @vite('resources/js/app.js');
+    <script>
+        window.addEventListener('load',  () =>{
+            const chirpChannel = window.Echo.channel("chirp");
+            chirpChannel.subscribed( () => {
+                console.log('subscribed');
+            });
+            chirpChannel.listen("ChirpCreated", (e) => {
+                console.log(e);
+            });
+        })
+    </script>
