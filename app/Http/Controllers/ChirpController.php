@@ -45,7 +45,7 @@ class ChirpController extends Controller
         $user = $request->user();
         $user->chirps()->create($validated);
         event(new ChirpCreated( $request->message ));
-        return redirect(route('chirps.index'));
+        return redirect(route('home'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ChirpController extends Controller
  
         $chirp->update($validated);
  
-        return redirect(route('chirps.index'));
+        return redirect(route('home'));
     }
 
     /**
@@ -108,6 +108,6 @@ class ChirpController extends Controller
  
         $chirp->delete();
  
-        return redirect(route('chirps.index'));
+        return redirect(route('home'));
     }
 }
