@@ -1,9 +1,9 @@
 <?php
-
+use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ChirpController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,10 +18,9 @@ use App\Http\Controllers\ChirpController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::controller(ChirpController::class)->middleware(['auth', 'verified'])->group( function(){
+    Route::get('/home', 'index')->name('home');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -30,7 +29,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('chirps', ChirpController::class)
-    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->only(['store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
