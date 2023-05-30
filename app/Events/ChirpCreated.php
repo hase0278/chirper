@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Chirp;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,7 +20,7 @@ class ChirpCreated implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct(Chirp $message)
     {
         $this->message = $message;
         //

@@ -13,7 +13,7 @@ class AppLayout extends Component
      */
     public $title;
 
-    public function __construct($title = "Laravel")
+    public function __construct($title = "Chirper")
     {
         $this->title = $title;
     }
